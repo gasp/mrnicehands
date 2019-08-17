@@ -31,10 +31,9 @@ class Noise {
   loadSample(url) {
     return fetch(url).then(response => // fetch is natively a promise
       response.arrayBuffer()).then(audioData => new Promise((resolve, reject) => {
-      // FIXME: something is wrong with Safari on this
       this.context.decodeAudioData(audioData, (buffer) => {
         resolve(buffer);
-      }).catch(err => (reject(err)));
+      }, err => (reject(err)));
     }));
   }
   play() {
